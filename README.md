@@ -1,5 +1,16 @@
 # vue-bitly-shortner
 
+### VueJS App for Bit.ly Link Shortner Service.
+Deploy Instructions:
+```
+https://cli.vuejs.org/guide/deployment.html
+```
+
+Add Environment Variable as:
+```
+VUE_APP_BITLY_API_KEY=YOUR_BIT.LY_API_KEY
+```
+
 ## Project setup
 ```
 yarn install

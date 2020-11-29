@@ -1,0 +1,5 @@
+vue create vue-bitly-shortner
+yarn add tailwindcss postcss autoprefixer
+yarn add axios vue-axios
+yarn tailwindcss init
+vue add router

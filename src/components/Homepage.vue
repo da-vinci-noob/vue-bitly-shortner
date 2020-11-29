@@ -1,15 +1,21 @@
 <template>
-  <div class="bg-gray-200">
+  <div class="bg-gray-200 dark:bg-gray-900">
+    <div class="theme-switch-wrapper">
+      <label class="theme-switch" for="switch_theme" @change="theme_switcher">
+        <input type="checkbox" id="switch_theme" />
+        <div class="slider round"></div>
+      </label>
+    </div>
     <div class="flex items-center justify-center h-screen ">
       <div class="flex-1">
       <input
         v-model="url"
-        class="p-4 mr-0 text-white bg-gray-500 border-t border-b border-l rounded-l-lg md:w-1/3 md:ml-8 "
+        class="p-4 mr-0 text-white bg-gray-500 rounded-l-lg ring-4 dark:text-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:bg-gray-500 md:w-1/3 md:ml-8"
         placeholder="https://www.google.com/"
       />
       <button
         @click="submit"
-        class="p-4 px-8 font-bold text-white transition duration-500 ease-in-out bg-red-600 border-t border-b border-r border-yellow-500 rounded-r-lg hover:bg-red-400 hover:animate-pulse"
+        class="p-4 px-8 font-bold text-white transition ease-in-out bg-red-600 rounded-r-lg duration-600 ring-4 dark:ring-gray-700 hover:bg-blue-400 hover:animate-pulse"
       >
         Short it
       </button>
@@ -25,12 +31,12 @@
         </span>
       </div>
     </div>
-    <div v-if="shortUrl" class="fixed top-0 left-0 z-10 block w-full h-full bg-white" >
+    <div v-if="shortUrl" class="fixed top-0 left-0 z-10 block w-full h-full bg-white dark:bg-gray-600" >
       <div class="flex items-center justify-center h-screen">
-        <span class="px-6 py-3 bg-red-400 rounded-lg rounded-r-none">
+        <span class="px-6 py-3 bg-red-400 rounded-lg rounded-r-none ring-4 ring-blue-600">
           {{ shortUrl['link'] }}
         </span>
-        <span @click="reset" class="px-6 py-3 text-gray-300 bg-blue-700 rounded-lg rounded-l-none cursor-pointer">
+        <span @click="reset" class="px-6 py-3 text-gray-300 bg-blue-700 rounded-lg rounded-l-none cursor-pointer ring-4 ring-blue-600 hover:animate-pulse">
           Cancel
         </span>
       </div>
@@ -50,6 +56,15 @@ export default {
       loading: false,
       url: null
     };
+  },
+  mounted() {
+    //do something after mounting vue instance
+    window.addEventListener('load', () => {
+         // run after everything is in-place
+      this.switch_theme()
+      if (document.querySelector('html').className === 'dark')
+        document.getElementById('switch_theme').checked = true
+    })
   },
   methods: {
     async submit() {
@@ -71,6 +86,25 @@ export default {
       this.loading = false
       // window.test = this.shortUrl
     },
+    theme_switcher () {
+      if (event.target.checked) {
+        localStorage.theme = 'dark'
+      } else {
+        localStorage.theme = 'light'
+      }
+      this.switch_theme()
+    },
+    switch_theme () {
+      if (localStorage.theme === 'dark' ) {
+        document.querySelector('html').classList.add('dark')
+        document.getElementById('switch_theme').checked = true
+      } else if (localStorage.theme === 'dark') {
+        document.querySelector('html').classList.add('dark')
+        document.getElementById('switch_theme').checked = true
+      } else if (localStorage.theme === 'light') {
+        document.querySelector('html').classList.remove('dark')
+      }
+    },
     reset () {
       this.shortUrl = null
       this.loading = null
@@ -81,5 +115,56 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+  }
+  .theme-switch {
+  display: inline-block;
+  height: 20px;
+  position: relative;
+  width: 40px;
+  }
 
+  .theme-switch input {
+  display:none;
+  }
+
+  .slider {
+  background-color: #ccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: .2s;
+  }
+
+  .slider:before {
+  background-color: #fff;
+  bottom: 4px;
+  content: "";
+  height: 12px;
+  left: 4px;
+  position: absolute;
+  transition: .4s;
+  width: 12px;
+  }
+
+  input:checked + .slider {
+  background-color: black;
+  }
+
+  input:checked + .slider:before {
+  transform: translateX(20px);
+  }
+
+  .slider.round {
+  border-radius: 34px;
+  }
+
+  .slider.round:before {
+  border-radius: 50%;
+  }
 </style>

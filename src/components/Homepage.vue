@@ -4,12 +4,12 @@
       <div class="flex-1">
       <input
         v-model="url"
-        class="text-white rounded-l-lg p-4 border-t mr-0 border-b border-l bg-gray-500 md:w-1/3 md:ml-8 "
+        class="p-4 mr-0 text-white bg-gray-500 border-t border-b border-l rounded-l-lg md:w-1/3 md:ml-8 "
         placeholder="https://www.google.com/"
       />
       <button
         @click="submit"
-        class="transition duration-500 ease-in-out px-8 rounded-r-lg bg-red-600 hover:bg-red-400 text-white font-bold p-4 border-yellow-500 border-t border-b border-r hover:animate-pulse"
+        class="p-4 px-8 font-bold text-white transition duration-500 ease-in-out bg-red-600 border-t border-b border-r border-yellow-500 rounded-r-lg hover:bg-red-400 hover:animate-pulse"
       >
         Short it
       </button>
@@ -17,20 +17,20 @@
       </div>
     </div>
     <div v-if="loading">
-      <div class="w-full h-full fixed block top-0 left-0 bg-white z-10">
+      <div class="fixed top-0 left-0 z-10 block w-full h-full bg-white">
         <span class="flex items-center justify-center h-screen">
-          <svg class="h-32 w-32 animate-spin text-green-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+          <svg class="w-32 h-32 text-green-500 fill-current animate-spin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
             <path d="M10 3v2a5 5 0 0 0-3.54 8.54l-1.41 1.41A7 7 0 0 1 10 3zm4.95 2.05A7 7 0 0 1 10 17v-2a5 5 0 0 0 3.54-8.54l1.41-1.41zM10 20l-4-4 4-4v8zm0-12V0l4 4-4 4z"/>
           </svg>
         </span>
       </div>
     </div>
-    <div v-if="shortUrl" class="w-full h-full fixed block top-0 left-0 bg-white z-10" >
+    <div v-if="shortUrl" class="fixed top-0 left-0 z-10 block w-full h-full bg-white" >
       <div class="flex items-center justify-center h-screen">
-        <span class="bg-red-400 px-6 py-3 rounded-lg rounded-r-none">
+        <span class="px-6 py-3 bg-red-400 rounded-lg rounded-r-none">
           {{ shortUrl['link'] }}
         </span>
-        <span @click="reset" class="cursor-pointer bg-blue-700 text-gray-300 px-6 py-3 rounded-lg rounded-l-none">
+        <span @click="reset" class="px-6 py-3 text-gray-300 bg-blue-700 rounded-lg rounded-l-none cursor-pointer">
           Cancel
         </span>
       </div>
